@@ -1,222 +1,114 @@
-import logging
-
-logger = logging.getLogger('uvicorn.error')
-
-
-def pend(x, t, faks, xm):
-    S = lambda: fx(t, faks[0])
-    F = lambda: fx(t, faks[1])
-    G = lambda: fx(t, faks[2])
-    T = lambda: fx(t, faks[3])
-    A = lambda: fx(t, faks[4])
-    D = lambda: fx(t, faks[5])
-    I = lambda: fx(t, faks[6])
+def pend(x, t, faks, f, xm):
+    S = lambda: f3(t, faks[0])
+    F = lambda: f3(t, faks[1])
+    G = lambda: f3(t, faks[2])
+    T = lambda: f3(t, faks[3])
+    A = lambda: f3(t, faks[4])
+    D = lambda: f3(t, faks[5])
+    I = lambda: f3(t, faks[6])
     P = faks[7][3]
     C = faks[8][3]
-    logger.info(x, t, faks, xm)
+
     dkdt = [
         # 0
         (
-                (1 / xm[0]) * f1s(S()) * f1x8(x)
+                (1 / xm[0]) * f3(S(), f[0]) * f0x8(x, f[1])
         ),
 
         # 1
         (
-                (1 / xm[1]) * F() * G() * f2s(S()) * f2x8(x) - f2x1(x) * f2x7(x)
+                (1 / xm[1]) * F() * G() * f3(S(), f[2]) * f0x8(x, f[3]) - f0x1(x, f[4]) * f0x7(x, f[5])
         ),
 
         # 2
         (
-                (1 / xm[2]) * f3x8(x) * f3x1(x)
+                (1 / xm[2]) * f0x8(x, f[6]) * f0x1(x, f[7])
         ),
 
         # 3
         (
-                (1 / xm[3]) * F() * G() * T() * f4x8(x) * f4x7(x) * f4x1(x)
+                (1 / xm[3]) * F() * G() * T() * f0x8(x, f[8]) * f0x7(x, f[9]) * f0x1(x, f[10])
         ),
 
         # 4
         (
-                (1 / xm[4]) * A() * f5s(S()) - f5x1(x) * f5x7(x)
+                (1 / xm[4]) * A() * f3(S(), f[11]) - f0x1(x, f[12]) * f0x7(x, f[13])
         ),
 
         # 5
         (
-                (1 / xm[5]) * f6s(S()) * f6x8(x)
+                (1 / xm[5]) * f3(S(), f[14]) * f0x8(x, f[15])
         ),
 
         # 6
         (
-                (1 / xm[6]) * f7x1(x)
+                (1 / xm[6]) * f0x1(x, f[16])
         ),
 
         # 7
         (
-                (1 / xm[7]) * D() * f8s(S()) - f8x4(x)
+                (1 / xm[7]) * D() * f3(S(), f[17]) - f0x4(x, f[18])
         ),
 
         # 8
         (
-                (1 / xm[8]) * I() * f9s(S()) - f9x1(x) * f9x7(x)
+                (1 / xm[8]) * I() * f3(S(), f[19]) - f0x1(x, f[20]) * f0x7(x, f[21])
         ),
 
         # 9
         (
-                (1 / xm[9]) * F() * G() * T() * f10s(S()) * f10x1(x) * f10x7(x)
+                (1 / xm[9]) * F() * G() * T() * f3(S(), f[22]) * f0x1(x, f[23]) * f0x7(x, f[24])
         ),
 
         # 10
         (
-                (1 / xm[10]) * P * C * F() * G() * D() * f11s(S()) * f11x6(x)
+                (1 / xm[10]) * P * C * F() * G() * D() * f3(S(), f[25]) * f0x6(x, f[26])
         ),
 
         # 11
         (
-                (1 * xm[11]) * f12x11(x)
+                (1 * xm[11]) * f0x11(x, f[27])
         )
     ]
     return dkdt
 
 
 def fx(x, params):
+    return params[0] * x ** 4 + params[1] * x ** 3 + params[2] * x ** 2 + params[3] * x + params[4]
+
+
+def f3(x, params):
     return params[0] * x ** 3 + params[1] * x ** 2 + params[2] * x + params[3]
 
 
-def f1s(s):
-    return 0.001 * s ** 3 - 0.04 * s ** 2 + 0.6 * s - 2.1
-
-
-def f1x8(t):
+def f0x8(t, p):
     x = x8(t)
-    return 54 * x ** 4 - 137 * x ** 3 + 103.4 * x ** 2 - 20.7 * x + 1.9
+    return fx(x, p)
 
 
-def f2s(s):
-    return -0.02 * s ** 3 + 0.64 * s ** 2 - 6.4 * s + 21
-
-
-def f2x8(t):
-    x = x8(t)
-    return -14.5 * x ** 2 + 22.5 * x - 3.3
-
-
-def f2x1(t):
+def f0x1(t, p):
     x = x1(t)
-    return 0.573 * x ** 2 + 0.276 * x + 0.046
+    return fx(x, p)
 
 
-def f2x7(t):
+def f0x7(t, p):
     x = x7(t)
-    return -3.335 * x ** 2 + 5.6 * x - 0.126
+    return fx(x, p)
 
 
-def f3x8(t):
-    x = x8(t)
-    return 3.276 * x ** 2 - 23.31 * x + 12.3
-
-
-def f3x1(t):
-    x = x1(t)
-    return -1.257 * x ** 2 + 10.1 * x - 17.8
-
-
-def f3x7(t):
-    x = x7(t)
-    return -0.328 * x ** 2 + 2.2 * x - 0.26
-
-
-def f4x8(t):
-    x = x8(t)
-    return -1.3 * x ** 4 + 1.92 * x ** 3 - 0.95 * x ** 2 + 0.3 * x + 0.7
-
-
-def f4x7(t):
-    x = x7(t)
-    return -0.42 * x ** 4 - 7.2 * x ** 3 + 19.34 * x ** 2 - 15.1 * x + 4.435
-
-
-def f4x1(t):
-    x = x1(t)
-    return x ** 3 - x ** 2 + 1.5 * x + 0.02
-
-
-def f5s(s):
-    return 0.01 * s ** 2 - 0.1 * s + 0.5
-
-
-def f5x1(t):
-    x = x1(t)
-    return 0.217 * x ** 2 - 0.505 * x + 0.31
-
-
-def f5x7(t):
-    x = x7(t)
-    return -0.304 * x ** 2 + 1.1 * x + 0.26
-
-
-def f6s(s):
-    return 0.002 * s ** 2 + 0.056 * s + 0.48
-
-
-def f6x8(t):
-    x = x8(t)
-    return -0.05 * x ** 3 + 0.9 * x ** 2 - 0.02 * x + 0.23
-
-
-def f7x1(t):
-    x = x1(t)
-    return 3.5 * x ** 3 - 5.3 * x ** 2 + 3.27 * x + 0.0003
-
-
-def f8s(s):
-    return 0.18 * s ** 3 - 0.06 * s ** 2 + 0.77 * s - 1.77
-
-
-def f8x4(t):
+def f0x4(t, p):
     x = x4(t)
-    return 2.17 * x ** 2 - 0.0024 * x + 0.16
+    return fx(x, p)
 
 
-def f9s(s):
-    return 0.002 * s ** 2 + 0.07 * s + 0.5
-
-
-def f9x1(t):
-    x = x1(t)
-    return 0.43 * x ** 3 - 2.3 * x ** 2 + 3.2 * x - 0.07
-
-
-def f9x7(t):
-    x = x7(t)
-    return 1.15 * x ** 3 - 1.78 * x ** 2 + 0.93 * x - 0.024
-
-
-def f10s(s):
-    return -0.0007 * s ** 4 + 0.03 * s ** 3 - 0.46 * s ** 2 + 2 * s - 0.4
-
-
-def f10x1(t):
-    x = x1(t)
-    return 0.25 * x ** 3 - 1.24 * x ** 2 + 0.04 * x - 0.049
-
-
-def f10x7(t):
-    x = x7(t)
-    return 10.9 * x ** 3 - 26.57 * x ** 2 + 16.7 * x - 0.515
-
-
-def f11s(s):
-    return -0.0005 * s ** 3 + 0.02 * s ** 2 - 0.01 * s + 0.4
-
-
-def f11x6(t):
+def f0x6(t, p):
     x = x6(t)
-    return -3.5 * x ** 3 + 7.8 * x ** 2 - 2.7 * x + 0.25
+    return fx(x, p)
 
 
-def f12x11(t):
+def f0x11(t, p):
     x = x11(t)
-    return -45.3 * x ** 4 + 111.95 * x ** 3 - 84.07 * x ** 2 + 20.04
+    return fx(x, p)
 
 
 def x1(t):

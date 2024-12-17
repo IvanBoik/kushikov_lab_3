@@ -56,17 +56,27 @@ function getRestrictions() {
     return restrictions
 }
 
+function getEquations() {
+    const equations = []
+
+    for (let i=1; i<30; i++) {
+        const temp = []
+        for (let j=1; j<6; j++) {
+            let el = document.getElementById("equations-" + i + "-" + j).value
+            temp.push(el)
+        }
+        equations.push(temp)
+    }
+    return equations
+}
+
 
 async function process() {
     const faks = getFaks()
     const init_eq = getInitialEquations()
     const restrictions = getRestrictions()
+    const equations = getEquations()
 
-    console.log(JSON.stringify({
-                "faks": faks,
-                "initial_equations": init_eq,
-                "restrictions": restrictions
-            }))
     const response = await fetch('/draw_graphics', {
             method: 'POST',
             headers: {
@@ -75,7 +85,8 @@ async function process() {
             body: JSON.stringify({
                 "faks": faks,
                 "initial_equations": init_eq,
-                "restrictions": restrictions
+                "restrictions": restrictions,
+                "equations": equations
             })
         })
 
@@ -99,6 +110,13 @@ function refill() {
         let init_eq_el = document.getElementById("init-eq-" + i).value = value
     }
 
+    for (let i=1; i<30; i++) {
+        for (let j=1; j<6; j++) {
+            let value = random()
+            sessionStorage.setItem("equations-" + i + "-" + j, value)
+            let el = document.getElementById("equations-" + i + "-" + j).value = value
+        }
+    }
     sessionStorage.removeItem("status")
     input.value = ""
 }

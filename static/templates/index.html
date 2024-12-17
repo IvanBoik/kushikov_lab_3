@@ -19,32 +19,53 @@
             <li class="nav-item">
                 <a class="nav-link" href="/diagrams">Диаграммы</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/faks">Возмущения</a>
-            </li>
         </ul>
     </header>
     <div class="container-fluid row py-3 g-4">
         <div class="col-lg-5">
             <h5>Характеристики</h5>
-            <div class="container-scroll">
+            <div class="container-scroll scroll-2">
                 {% for x in faks %}
                 <div class="block-function">
-                    <span>{{ x }}(x)=</span>
+                    <span>{{ x }}(t)=</span>
                     <input id="faks-{{ loop.index }}-1" type="text">
-                    <span>*x^3+</span>
+                    <span>*t^3+</span>
                     <input id="faks-{{ loop.index }}-2" type="text">
-                    <span>*x^2+</span>
+                    <span>*t^2+</span>
                     <input id="faks-{{ loop.index }}-3" type="text">
-                    <span>*x+</span>
+                    <span>*t+</span>
                     <input id="faks-{{ loop.index }}-4" type="text">
                 </div>
                 {% endfor %}
             </div>
 
+            <div class="mt-4">
+                <h5>Уравнения</h5>
+                <div class="container-scroll scroll-2">
+                    {% for x in equations %}
+                    <div class="block-function">
+                        {% if 's' in x %}
+                        {% set parameter = 's' %}
+                        {% else %}
+                        {% set parameter = 'x' %}
+                        {% endif %}
+                        <span>{{ x }}(x)=</span>
+                        <input id="equations-{{ loop.index }}-1" type="text">
+                        <span>*{{ parameter }}^4+</span>
+                        <input id="equations-{{ loop.index }}-2" type="text">
+                        <span>*{{ parameter }}^3+</span>
+                        <input id="equations-{{ loop.index }}-3" type="text">
+                        <span>*{{ parameter }}^2+</span>
+                        <input id="equations-{{ loop.index }}-4" type="text">
+                        <span>*{{ parameter }}+</span>
+                        <input id="equations-{{ loop.index }}-5" type="text">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         <div class="col-lg-7">
-            <h5>Начальные уравнения</h5>
+            <h5>Начальные условия</h5>
             <div class="container-scroll scroll-1">
                 {% for x in initial_equations %}
                 <div class="block-function border-function">
@@ -52,7 +73,7 @@
                         <span>{{ x }}</span>
                         <input id="init-eq-{{ loop.index }}" type="text">
                     </div>
-                    <span> Ограничение: </span>
+                    <span> Предельное значение: </span>
                     <input id="restrictions-{{ loop.index }}" type="text" value="1.0">
                 </div>
                 {% endfor %}

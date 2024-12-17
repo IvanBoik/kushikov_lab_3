@@ -76,6 +76,3 @@ def clear_graphics():
 
     if os.path.exists("static/images/figure.png"):
         os.remove("static/images/figure.png")
-
-    if os.path.exists("static/images/figure2.png"):
-        os.remove("static/images/figure2.png")
