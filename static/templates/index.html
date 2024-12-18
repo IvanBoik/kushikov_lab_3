@@ -49,7 +49,7 @@
                         {% else %}
                         {% set parameter = 'x' %}
                         {% endif %}
-                        <span>{{ x }}(x)=</span>
+                        <span>{{ x }}({{ parameter }})=</span>
                         <input id="equations-{{ loop.index }}-1" type="text">
                         <span>*{{ parameter }}^4+</span>
                         <input id="equations-{{ loop.index }}-2" type="text">

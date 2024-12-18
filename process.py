@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from labellines import labelLines
 import numpy as np
 from scipy.integrate import odeint
 import logging
@@ -30,8 +31,10 @@ def create_graphic(t, data):
     plt.subplot(111)
     for i in range(12):
         plt.plot(t, list(map(lambda elem: 0 if elem < 0 else elem, data[:, i])), color=lines[i][0],
-                 linestyle=lines[i][1], label=u_list[i])
+                 linestyle=lines[i][1], label=f"X{i}")
     plt.xlabel("t, время")
+    plt.ylabel("Характеристики")
+    labelLines(plt.gca().get_lines(), zorder=2.5)
     plt.xlim([0, 1])
     plt.ylim(bottom=0)
     plt.legend(loc='lower right', bbox_to_anchor=(1, 1), labelspacing=0.1, fontsize='small')

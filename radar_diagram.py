@@ -94,16 +94,15 @@ class RadarDiagram:
         N = 12
         theta = self.radar_factory(N, frame='polygon')
 
-        spoke_labels = label
-
         fig, axs = plt.subplots(figsize=(12, 12), subplot_kw=dict(projection='radar'))
         fig.subplots_adjust(wspace=1, hspace=1, top=0.85, bottom=0.05)
 
         np.average(data)
         axs.plot(theta, data, color='b')
         axs.plot(theta, restrictions, color='r')
-        axs.legend(["Характеристики системы", "Ограничения"], loc=(-.13, .99), labelspacing=0.1, fontsize='medium')
-        axs.set_varlabels(spoke_labels)
+        axs.legend(["Характеристики системы", "Предельные значения"], loc=(-.13, .99), labelspacing=0.1,
+                   fontsize='medium')
+        axs.set_varlabels(["X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "X10", "X11", "X12"])
 
         fig.text(0.5, 0.965, title,
                  horizontalalignment='center', color='black', weight='bold',
