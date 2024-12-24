@@ -30,9 +30,35 @@ async def main(
         "initial_equations": initial_equations,
         "faks": ["S", "F", "G", "T", "A", "D", "I", "P", "C"],
         "equations": [
-            "F1s", "F1x8", "F2s", "F2x8", "F2x1", "F2x7", "F3x8", "F3x1", "F3x7", "F4x8",
-            "F4x7", "F4x1", "F5s", "F5x1", "F5x7", "F6s", "F6x8", "F7x1", "F8s", "F8x4",
-            "F9s", "F9x1", "F9x7", "F10s", "F10x1", "F10x7", "F11s", "F11x6", "F12x11"
+            {"f": "F1", "param": "s"},
+            {"f": "F1", "param": "x8"},
+            {"f": "F2", "param": "s"},
+            {"f": "F2", "param": "x8"},
+            {"f": "F2", "param": "x1"},
+            {"f": "F2", "param": "x7"},
+            {"f": "F3", "param": "x8"},
+            {"f": "F3", "param": "x1"},
+            {"f": "F3", "param": "x7"},
+            {"f": "F4", "param": "x8"},
+            {"f": "F4", "param": "x7"},
+            {"f": "F4", "param": "x1"},
+            {"f": "F5", "param": "s"},
+            {"f": "F5", "param": "x1"},
+            {"f": "F5", "param": "x7"},
+            {"f": "F6", "param": "s"},
+            {"f": "F6", "param": "x8"},
+            {"f": "F7", "param": "x1"},
+            {"f": "F8", "param": "s"},
+            {"f": "F8", "param": "x4"},
+            {"f": "F9", "param": "s"},
+            {"f": "F9", "param": "x1"},
+            {"f": "F9", "param": "x7"},
+            {"f": "F10", "param": "s"},
+            {"f": "F10", "param": "x1"},
+            {"f": "F10", "param": "x7"},
+            {"f": "F11", "param": "s"},
+            {"f": "F11", "param": "x6"},
+            {"f": "F12", "param": "x11"}
         ]
     })
 

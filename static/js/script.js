@@ -19,6 +19,12 @@ else {
     for (let i=1; i<13; i++) {
         let init_eq_el = document.getElementById("init-eq-" + i).value = sessionStorage.getItem("init-eq-" + i)
     }
+
+    for (let i=1; i<30; i++) {
+        for (let j=1; j<6; j++) {
+            let el = document.getElementById("equations-" + i + "-" + j).value = sessionStorage.getItem("equations-" + i + "-" + j)
+        }
+    }
 }
 
 

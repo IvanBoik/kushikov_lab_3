@@ -44,20 +44,15 @@
                 <div class="container-scroll scroll-2">
                     {% for x in equations %}
                     <div class="block-function">
-                        {% if 's' in x %}
-                        {% set parameter = 's' %}
-                        {% else %}
-                        {% set parameter = 'x' %}
-                        {% endif %}
-                        <span>{{ x }}({{ parameter }})=</span>
+                        <span>{{ x["f"] }}({{ x["param"] }})=</span>
                         <input id="equations-{{ loop.index }}-1" type="text">
-                        <span>*{{ parameter }}^4+</span>
+                        <span>*{{ x["param"] }}^4+</span>
                         <input id="equations-{{ loop.index }}-2" type="text">
-                        <span>*{{ parameter }}^3+</span>
+                        <span>*{{ x["param"] }}^3+</span>
                         <input id="equations-{{ loop.index }}-3" type="text">
-                        <span>*{{ parameter }}^2+</span>
+                        <span>*{{ x["param"] }}^2+</span>
                         <input id="equations-{{ loop.index }}-4" type="text">
-                        <span>*{{ parameter }}+</span>
+                        <span>*{{ x["param"] }}+</span>
                         <input id="equations-{{ loop.index }}-5" type="text">
                     </div>
                     {% endfor %}

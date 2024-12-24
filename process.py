@@ -31,13 +31,13 @@ def create_graphic(t, data):
     plt.subplot(111)
     for i in range(12):
         plt.plot(t, list(map(lambda elem: 0 if elem < 0 else elem, data[:, i])), color=lines[i][0],
-                 linestyle=lines[i][1], label=f"X{i}")
-    plt.xlabel("t, время")
-    plt.ylabel("Характеристики")
-    labelLines(plt.gca().get_lines(), zorder=2.5)
+                 linestyle=lines[i][1], label=f"X{i + 1}")
+    plt.xlabel("t, время", fontsize=16)
+    plt.ylabel("Характеристики", fontsize=16)
+    labelLines(plt.gca().get_lines(), fontsize=16)
     plt.xlim([0, 1])
     plt.ylim(bottom=0)
-    plt.legend(loc='lower right', bbox_to_anchor=(1, 1), labelspacing=0.1, fontsize='small')
+    plt.legend(loc='lower right', bbox_to_anchor=(1, 1), labelspacing=0.1, fontsize=16)
     plt.tight_layout()
     fig.savefig('./static/images/figure.png', bbox_inches='tight')
 
